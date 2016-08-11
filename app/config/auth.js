@@ -4,9 +4,9 @@
 module.exports = {
 
     'facebookAuth' : {
-        'clientID'      : '105660646519031', // your App ID
-        'clientSecret'  : '5033b154b10d7720e948294345583ed2', // your App Secret
-        'callbackURL'   : 'http://localhost:8000/auth/facebook/callback', 
+        'clientID'      : '866846263448510', // your App ID
+        'clientSecret'  : 'fe1cf18a001ae35b82684266c919eb08', // your App Secret
+        'callbackURL'   : 'http://www.dinhcu.top/auth/facebook/callback', 
         'profileFields': ["id", "email", "gender", "about", "birthday", "cover"]
     },
 
