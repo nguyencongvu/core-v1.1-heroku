@@ -12,6 +12,7 @@ var configAuth = require('../config/auth'); // fb, twitter, google, mailer
 var async = require('async');
 var crypto = require('crypto'); //--gen token
 var nodemailer = require('nodemailer');
+var sgTransport = require('nodemailer-sendgrid-transport');
 
 var express = require('express');
 var router = express.Router();
@@ -266,17 +267,25 @@ router.post('/signup', function(req,res,next){
         }, 
 
         function sendMail(token, user, done){
-           
-            var transporter = nodemailer.createTransport({
-                pool: true,
-                secure: true, // use SSL
-                port: configAuth.mailer.port,
-                service: configAuth.mailer.service,
+            
+            var options = {
                 auth: {
-                    user: configAuth.mailer.user,
-                    pass: configAuth.mailer.pass
+                    api_user: configAuth.mailer.user,
+                    api_key: configAuth.mailer.pass
                 }
-            });
+            }
+            var transporter = nodemailer.createTransport(sgTransport(options));
+
+            // var transporter = nodemailer.createTransport({
+            //     pool: true,
+            //     secure: true, // use SSL
+            //     port: configAuth.mailer.port,
+            //     service: configAuth.mailer.service,
+            //     auth: {
+            //         user: configAuth.mailer.user,
+            //         pass: configAuth.mailer.pass
+            //     }
+            // });
 
             var mailOptions = {
                 to: user.email,
@@ -289,6 +298,8 @@ router.post('/signup', function(req,res,next){
             };
             transporter.sendMail(mailOptions, function(err) {
                 req.flash('message', 'An e-mail has been sent to ' + user.email + ' to activate your account.');
+                if (err)
+                    req.flash('message', 'Cannot send e-mail to ' + user.email + ' to activate your account.');     
                 done(err, 'done');
             });
         },
@@ -372,18 +383,24 @@ router.post('/passwordreset', function(req, res, next) {
         });
     },
     function(token, user, done) {
-        var transporter = nodemailer.createTransport({
-            pool: true,
-            secure: true, // use SSL
-            port: configAuth.mailer.port,
-            service: configAuth.mailer.service,
-            auth: {
-                user: configAuth.mailer.user,
-                pass: configAuth.mailer.pass
+           var options = {
+                auth: {
+                    api_user: configAuth.mailer.user,
+                    api_key: configAuth.mailer.pass
+                }
             }
-        });
+            var transporter = nodemailer.createTransport(sgTransport(options));
 
-        console.log('created');
+            // var transporter = nodemailer.createTransport({
+            //     pool: true,
+            //     secure: true, // use SSL
+            //     port: configAuth.mailer.port,
+            //     service: configAuth.mailer.service,
+            //     auth: {
+            //         user: configAuth.mailer.user,
+            //         pass: configAuth.mailer.pass
+            //     }
+            // });
 
         var mailOptions = {
             to: user.email,
@@ -450,17 +467,24 @@ router.post('/reset/:token', function(req, res) {
         });
     },
     function(user, done) {
-        var transporter = nodemailer.createTransport({
-            pool: true,
-            secure: true, // use SSL
-            port: configAuth.mailer.port,
-            service: configAuth.mailer.service,
-            auth: {
-                user: configAuth.mailer.user,
-                pass: configAuth.mailer.pass
+            var options = {
+                auth: {
+                    api_user: configAuth.mailer.user,
+                    api_key: configAuth.mailer.pass
+                }
             }
-        });
+            var transporter = nodemailer.createTransport(sgTransport(options));
 
+            // var transporter = nodemailer.createTransport({
+            //     pool: true,
+            //     secure: true, // use SSL
+            //     port: configAuth.mailer.port,
+            //     service: configAuth.mailer.service,
+            //     auth: {
+            //         user: configAuth.mailer.user,
+            //         pass: configAuth.mailer.pass
+            //     }
+            // });
         var mailOptions = {
             to: user.email,
             from: configAuth.mailer.from,
@@ -504,15 +528,24 @@ router.get('/activate/:token', function(req, res) {
         });
     },
     function sendMail(user, done) {
-        var transporter = nodemailer.createTransport({
-            pool: true,
-            secure: true, // use SSL
-            port: configAuth.mailer.port,
-            auth: {
-                user: configAuth.mailer.user,
-                pass: configAuth.mailer.pass
+            var options = {
+                auth: {
+                    api_user: configAuth.mailer.user,
+                    api_key: configAuth.mailer.pass
+                }
             }
-        });
+            var transporter = nodemailer.createTransport(sgTransport(options));
+
+            // var transporter = nodemailer.createTransport({
+            //     pool: true,
+            //     secure: true, // use SSL
+            //     port: configAuth.mailer.port,
+            //     service: configAuth.mailer.service,
+            //     auth: {
+            //         user: configAuth.mailer.user,
+            //         pass: configAuth.mailer.pass
+            //     }
+            // });
 
         var mailOptions = {
             to: user.email,
