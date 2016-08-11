@@ -23,10 +23,14 @@ module.exports = {
     }, 
 
     'mailer' : {
-        service: "Gmail",
+        // service: "Gmail",
         port: 465,
-        user: 'nguyencongvu@gmail.com',
-        pass: 'Go.1b.16', 
+        service: "SendGrid",
+        // user: 'nguyencongvu@gmail.com',
+        // pass: 'Go.1b.16', 
+        user: "dinhcu.top",
+        pass: "Se.1b.16",
+        
         from: 'system@domain.com', //-- reply To   
         templates: "../public/templates",
     }
