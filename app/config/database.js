@@ -1,5 +1,5 @@
 // -- local     
-var dbName = 'socialCRM'; //--EDIT in config 
+var dbName = 'teamshow'; //--EDIT in config 
 // var connectionString = 'mongodb://localhost:27017/' + dbName;
 var connectionString = 'mongodb://127.0.0.1:27017/' + dbName;
 
