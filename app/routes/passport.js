@@ -89,6 +89,7 @@ passport.use(new FacebookStrategy({
                     newUser.facebook.email = profile.email; // facebook can return multiple emails so we'll take the first
 
                     newUser.activated = true;
+                    newUser.role = "user";
 
                     // save our user to the database
                     newUser.save(function(err) {
@@ -134,6 +135,7 @@ passport.use(new GoogleStrategy({
                     newUser.google.email = profile.emails[0].value; // pull the first email
 
                     newUser.activated = true;
+                    newUser.role = "user";
                     // save the user
                     newUser.save(function(err) {
                         if (err)
