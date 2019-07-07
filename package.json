@@ -6,7 +6,7 @@
   "dependencies": {
     "express": "latest",
     "socket.io": "latest"
-  }
+  },
   "scripts": {
   "start": "node app.js"
 },
