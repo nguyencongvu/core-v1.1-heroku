@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "node app ",
   "main": "app.js",
+  "dependencies": {
+    "express": "latest",
+    "socket.io": "latest"
+  }
   "scripts": {
   "start": "node app.js"
 },
@@ -15,9 +19,6 @@
   "bugs": {
   "url": ""
 },
-  "homepage": "",
-  "dependencies": {
-    "express": "latest",
-    "socket.io": "latest"
-  }
+  "homepage": ""
+  
 }
